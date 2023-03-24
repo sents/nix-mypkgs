@@ -5,5 +5,6 @@
     in
       {
         xorg = prev.xorg // { xwayland = mypkgs.xwayland;};
+        maia-icon-theme = mypkgs.maia-icon-theme;
       };
 }
