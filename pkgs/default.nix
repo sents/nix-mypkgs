@@ -1,5 +1,5 @@
 {pkgs}:
 {
   xwayland = pkgs.callPackage ./xwayland {};
-  maia-icon-theme = pkgs.callPackage ./maia-icon-theme {};
+  maia-icon-theme = pkgs.libsForQt5.callPackage ./maia-icon-theme {};
 }
