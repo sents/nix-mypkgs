@@ -41,7 +41,6 @@ stdenv.mkDerivation {
     for theme in $out/share/icons/*; do
       gtk-update-icon-cache $theme
     done
-    echo "${plasma-framework}" >> $out/nix-support/depends
   '';
 
   meta = with lib; {
