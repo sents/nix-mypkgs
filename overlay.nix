@@ -1,3 +1,4 @@
+{packages}:
 {
   default = final: prev:
     let
@@ -6,5 +7,6 @@
       {
         xorg = prev.xorg // { xwayland = mypkgs.xwayland;};
         maia-icon-theme = mypkgs.maia-icon-theme;
+        swycle = packages.${prev.system}.swycle;
       };
 }

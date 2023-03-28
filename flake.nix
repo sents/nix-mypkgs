@@ -32,7 +32,7 @@
             { inherit packages; })
         //
         {
-          overlays = import ./overlay.nix;
+          overlays = import ./overlay.nix { packages = self.packages;};
         }
       );
 }
