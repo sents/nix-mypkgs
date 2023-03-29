@@ -6,6 +6,8 @@
 , plasma-framework
 , kwindowsystem
 , hicolor-icon-theme
+, kconfig
+, kconfigwidgets
 }:
 
 stdenv.mkDerivation {
@@ -31,6 +33,9 @@ stdenv.mkDerivation {
 
   propagatedBuildInputs = [
     hicolor-icon-theme
+    plasma-framework.bin
+    kconfig
+    kconfigwidgets
   ];
 
   dontDropIconThemeCache = true;
@@ -41,6 +46,10 @@ stdenv.mkDerivation {
     for theme in $out/share/icons/*; do
       gtk-update-icon-cache $theme
     done
+  '';
+  postFixup = ''
+  mkdir -p $out/nix-support
+  echo ${plasma-framework.bin} ${kconfig.out} ${kconfig.bin} ${kconfig.dev} ${kconfigwidgets} >> $out/nix-support/propagated-user-env-packages
   '';
 
   meta = with lib; {
