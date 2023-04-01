@@ -1,36 +1,35 @@
 { lib
 , stdenv
 , fetchFromGitHub
-, plasma-framework
-, plasma-workspace
-, kdeclarative
-, config ? {}
+, qtgraphicaleffects
+, themeConfig ? { }
 }:
 let
-  configLines = lib.mapAttrsToList (name: value: lib.nameValuePair name value) config;
+  customToString = x: if builtins.isBool x then lib.boolToString x else toString x;
+  configLines = lib.mapAttrsToList (name: value: lib.nameValuePair name value) themeConfig;
   configureTheme = "cp theme.conf theme.conf.orig \n" +
-    (lib.concatMapStringsSep "\n" (configLine:
-      "grep -q '^${configLine.name}=' theme.conf || echo '${configLine.name}=' >> \"$1\"\n" +
-      "sed -i -e 's/^${configLine.name}=.*$/${configLine.name}=${
-        lib.escape [ "/" "&" "\\"] configLine.value
+    (lib.concatMapStringsSep "\n"
+      (configLine:
+        "grep -q '^${configLine.name}=' theme.conf || echo '${configLine.name}=' >> \"$1\"\n" +
+          "sed -i -e 's/^${configLine.name}=.*$/${configLine.name}=${
+        lib.escape [ "/" "&" "\\"] (customToString configLine.value)
       }/' theme.conf"
-    ) configLines);
+      )
+      configLines);
 in
 stdenv.mkDerivation {
   pname = "sddm-chili-theme";
-  version = "0.5.5";
+  version = "0.1.5";
 
   src = fetchFromGitHub {
     owner = "MarianArlt";
-    repo = "kde-plasma-chili";
-    rev = "a371123959676f608f01421398f7400a2f01ae06";
-    sha256 = "17pkxpk4lfgm14yfwg6rw6zrkdpxilzv90s48s2hsicgl3vmyr3x";
+    repo = "sddm-chili";
+    rev = "6516d50176c3b34df29003726ef9708813d06271";
+    sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
   };
 
   propagatedBuildInputs = [
-    plasma-framework
-    plasma-workspace
-    kdeclarative
+    qtgraphicaleffects
   ];
 
   dontWrapQtApps = true;
@@ -39,14 +38,15 @@ stdenv.mkDerivation {
 
   postInstall = ''
     mkdir -p $out/share/sddm/themes/chili
+
     mv * $out/share/sddm/themes/chili/
   '';
 
   postFixup = ''
     mkdir -p $out/nix-support
-    echo ${plasma-framework.bin} \
-         ${plasma-workspace} \
-         ${kdeclarative} >> $out/nix-support/propagated-user-env-packages
+
+    echo ${qtgraphicaleffects} \
+         >> $out/nix-support/propagated-user-env-packages
   '';
   meta = with lib; {
     license = licenses.gpl3;
