@@ -4,9 +4,10 @@
     let
       mypkgs = import ./pkgs {pkgs = prev;};
     in
-      {
-        sddm-chili-theme = mypkgs.sddm-chili-theme;
-        mensapy = mypkgs.mensapy;
+      with mypkgs; {
+        inherit sddm-chili-theme;
+        inherit mensapy;
+        inherit emacs;
         swycle = packages.${prev.system}.swycle;
       };
 }
