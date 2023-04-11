@@ -28,11 +28,17 @@ stdenv.mkDerivation {
     sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
   };
 
-  propagatedBuildInputs = [
+  buildInputs = [
     qtgraphicaleffects
   ];
 
   dontWrapQtApps = true;
+
+  postPatch = ''
+  substituteInPlace ./components/UserDelegate.qml ./components/Wallpaper.qml \
+  --replace "import QtGraphicalEffects 1.0" \
+  "import \"${qtgraphicaleffects}/lib/qt-5.15.8/qml/QtGraphicalEffects\""
+  '';
 
   preInstall = configureTheme;
 
@@ -42,12 +48,6 @@ stdenv.mkDerivation {
     mv * $out/share/sddm/themes/chili/
   '';
 
-  postFixup = ''
-    mkdir -p $out/nix-support
-
-    echo ${qtgraphicaleffects} \
-         >> $out/nix-support/propagated-user-env-packages
-  '';
   meta = with lib; {
     license = licenses.gpl3;
     homepage = https://github.com/MarianArlt/sddm-chili;
