@@ -1,5 +1,5 @@
 import ./generic.nix (rec {
   version = "29.1";
-  rev = "6b9f9df9454a59b74790c402916df8628bb9d477";
-  sha256 = "17zc968kradi4pqgnfi6hizzqzjm2sckff49fxic05iijgi5pc7x";
+  rev = "d5ab8b6f2459b0c0111edc1ac7da20e1452c1f33";
+  sha256 = "0y2dgr57h6c8viyf9z8ka9rfrmgrxn2dqf6gd68jbgqx3z0fgx4c";
 })
