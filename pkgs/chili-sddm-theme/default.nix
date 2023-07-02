@@ -37,7 +37,7 @@ stdenv.mkDerivation {
   postPatch = ''
   substituteInPlace ./components/UserDelegate.qml ./components/Wallpaper.qml \
   --replace "import QtGraphicalEffects 1.0" \
-  "import \"${qtgraphicaleffects}/lib/qt-5.15.8/qml/QtGraphicalEffects\""
+  "import \"${qtgraphicaleffects}/lib/qt-${qtgraphicaleffects.version}/qml/QtGraphicalEffects\""
   '';
 
   preInstall = configureTheme;
