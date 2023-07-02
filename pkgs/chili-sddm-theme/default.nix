@@ -16,19 +16,6 @@ let
       }/' theme.conf"
       )
       configLines);
-  mygraphicaleffects = stdenv.mkDerivation {
-    name = "chili-qtgraphicaleffects";
-    src = qtgraphicaleffects;
-
-    installPhase = ''
-      runHook preInstall
-      rm -f lib/qt-${qtgraphicaleffects.version}/qml/QtGraphicalEffects/qmldir
-      mkdir -p $out/lib
-      cp -r lib $out/
-      runHook postInstall
-    '';
-
-  };
 in
 stdenv.mkDerivation {
   pname = "sddm-chili-theme";
@@ -47,12 +34,6 @@ stdenv.mkDerivation {
 
   dontWrapQtApps = true;
 
-  postPatch = ''
-  substituteInPlace ./components/UserDelegate.qml ./components/Wallpaper.qml \
-  --replace "import QtGraphicalEffects 1.0" \
-  "import \"${mygraphicaleffects}/lib/qt-${qtgraphicaleffects.version}/qml/QtGraphicalEffects\""
-  '';
-
   preInstall = configureTheme;
 
   postInstall = ''
@@ -61,6 +42,12 @@ stdenv.mkDerivation {
     mv * $out/share/sddm/themes/chili/
   '';
 
+  postFixup = ''
+    mkdir -p $out/nix-support
+
+    echo ${qtgraphicaleffects} \
+         >> $out/nix-support/propagated-user-env-packages
+  '';
   meta = with lib; {
     license = licenses.gpl3;
     homepage = https://github.com/MarianArlt/sddm-chili;
