@@ -16,6 +16,19 @@ let
       }/' theme.conf"
       )
       configLines);
+  mygraphicaleffects = stdenv.mkDerivation {
+    name = "chili-qtgraphicaleffects";
+    src = qtgraphicaleffects;
+
+    installPhase = ''
+      runHook preInstall
+      rm -f lib/qt-${qtgraphicaleffects.version}/qml/QtGraphicalEffects/qmldir
+      mkdir -p $out/lib
+      cp -r lib $out/
+      runHook postInstall
+    '';
+
+  };
 in
 stdenv.mkDerivation {
   pname = "sddm-chili-theme";
@@ -37,7 +50,7 @@ stdenv.mkDerivation {
   postPatch = ''
   substituteInPlace ./components/UserDelegate.qml ./components/Wallpaper.qml \
   --replace "import QtGraphicalEffects 1.0" \
-  "import \"${qtgraphicaleffects}/lib/qt-${qtgraphicaleffects.version}/qml/QtGraphicalEffects\""
+  "import \"${mygraphicaleffects}/lib/qt-${qtgraphicaleffects.version}/qml/QtGraphicalEffects\""
   '';
 
   preInstall = configureTheme;
