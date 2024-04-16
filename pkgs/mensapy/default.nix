@@ -1,5 +1,5 @@
-{ stdenv, lib, python311Packages }:
-python311Packages.buildPythonPackage rec {
+{ stdenv, lib, python3Packages }:
+python3Packages.buildPythonPackage rec {
   pname = "mensapy";
   version = "0.3.0";
 
@@ -9,7 +9,7 @@ python311Packages.buildPythonPackage rec {
     rev = "045895191d7ef89bedf999c3a222bd2634f9102f";
   };
 
-  propagatedBuildInputs = with python311Packages; [ lxml requests beautifulsoup4 ];
+  propagatedBuildInputs = with python3Packages; [ lxml requests beautifulsoup4 ];
 
   doCheck = false;
 
