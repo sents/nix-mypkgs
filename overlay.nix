@@ -7,6 +7,7 @@
       with mypkgs; {
         inherit sddm-chili-theme;
         inherit mensapy;
+        inherit pdftowrite;
         # inherit xdg-terminal-exec;
         swycle = packages.${prev.system}.swycle;
       };
