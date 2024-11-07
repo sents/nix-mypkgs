@@ -9,10 +9,10 @@ python3Packages.buildPythonPackage rec {
 
   src = fetchFromGitHub
  {
-    owner = "kosmospredanie";
+    owner = "sents";
     repo = "pdftowrite";
-    rev = "2021.05.03";
-    hash = "sha256-IFX9K74tfGKyMtqlc/RsV00baZEzE3HcPAGfrmTHnDQ=";
+    rev = "2024.04.17";
+    hash = "sha256-YK0GmpDOE95Gx4TzPYHrc4J4Ai4j0ihbwfmQqlvoqPc=";
   };
 
   BuildInputs = [
