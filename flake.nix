@@ -1,13 +1,15 @@
 {
   description =
     "Packages for me";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "flake:nixpkgs";
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.configurable-flakes.url = "github:sents/configurable-flakes";
   inputs.swycle.url = "github:sents/swycle";
   inputs.swycle.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.emojipicker.url = "github:sents/emojipicker";
+  inputs.emojipicker.inputs.nixpkgs.follows = "nixpkgs";
 
-  outputs = inputs@{ self, nixpkgs, flake-utils, configurable-flakes, swycle}:
+  outputs = inputs@{ self, nixpkgs, flake-utils, configurable-flakes, swycle, emojipicker}:
     let
       lib = nixpkgs.lib;
     in
@@ -27,6 +29,7 @@
             packages = import ./pkgs/default.nix { inherit pkgs;} //
                        {
                          swycle = swycle.packages.${system}.swycle;
+                         emojipicker = emojipicker.packages.${system}.default;
                        };
           in
             { inherit packages; })

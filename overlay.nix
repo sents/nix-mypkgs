@@ -10,5 +10,6 @@
         inherit pdftowrite;
         # inherit xdg-terminal-exec;
         swycle = packages.${prev.system}.swycle;
+        emojipicker = packages.${prev.system}.emojipicker;
       };
 }

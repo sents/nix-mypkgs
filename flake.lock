@@ -36,16 +36,37 @@
         "type": "github"
       }
     },
+    "emojipicker": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1730984621,
+        "narHash": "sha256-BXvrEOHRk9r2pf3MRSQCWqKRR5FnxWJe+dRxjIyOCLs=",
+        "owner": "sents",
+        "repo": "emojipicker",
+        "rev": "ebaa158575057d4341c28b61399949f76c701f5a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sents",
+        "repo": "emojipicker",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1710146030,
-        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "lastModified": 1726560853,
+        "narHash": "sha256-X6rJYSESBVr3hBoH0WbKE5KvhPU5bloyZ2L4K60/fPQ=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "rev": "c1dfcf08411b08f6b8615f7d8971a2bfa81d5e8a",
         "type": "github"
       },
       "original": {
@@ -71,18 +92,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1711163522,
-        "narHash": "sha256-YN/Ciidm+A0fmJPWlHBGvVkcarYWSC+s3NTPk/P+q3c=",
+        "lastModified": 1729880355,
+        "narHash": "sha256-RP+OQ6koQQLX5nw0NmcDrzvGL8HDLnyXt/jHhL1jwjM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "44d0940ea560dee511026a53f0e2e2cde489b4d4",
+        "rev": "18536bf04cd71abd345f9579158841376fdd0c5a",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
+        "id": "nixpkgs",
+        "type": "indirect"
       }
     },
     "nixpkgs-lib": {
@@ -124,9 +143,31 @@
     "root": {
       "inputs": {
         "configurable-flakes": "configurable-flakes",
+        "emojipicker": "emojipicker",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
         "swycle": "swycle"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "emojipicker",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1730255392,
+        "narHash": "sha256-9pydem8OVxa0TwjUai1PJe0yHAJw556CWCEwyoAq8Ik=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "7509d76ce2b3d22b40bd25368b45c0a9f7f36c89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "swycle": {
